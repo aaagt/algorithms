@@ -3,6 +3,7 @@ include("shop")
 include("hobby")
 include("teams")
 include("linked-stack")
+include("names-tree")
 
 pluginManagement {
     plugins {
