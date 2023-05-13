@@ -31,9 +31,7 @@ public class Main {
         System.out.println(root.contains("Борис")); // true
         System.out.println(root.contains("Анна")); // false
 
-        /* Ваше задание (нужно раскомментировать)
         System.out.println("Проверка на пирамидальность по длине имени");
-
         System.out.println(root.isNamePyramid()); // true
 
         // Меняем имя в одном из узлов на Павел
@@ -43,7 +41,6 @@ public class Main {
         rr.setName("Павел");
         System.out.println(root.isNamePyramid()); // false
 
-        */
     }
 
 }
