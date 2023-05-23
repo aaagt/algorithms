@@ -11,7 +11,7 @@ public class Main {
         System.out.println(hasRepeats(source, 5)); // false
     }
 
-    public static boolean hasRepeats(String source, int size) {
+    public static boolean hasRepeatsSlow(String source, int size) {
         Set<String> slices = new HashSet<>(); // множество всех подстрок длины size
         for (int i = 0; i <= source.length() - size; i++) { // перебор всех мест старта подстроки
             String slice = source.substring(i, i + size); // вырезание подстроки
@@ -20,6 +20,39 @@ public class Main {
             } else {
                 slices.add(slice);  // иначе запоминаем подстроку и перебираем дальше
             }
+        }
+        return false; // если бы нашли, то вышли бы по return true, а значит повторов нет
+    }
+
+    public static boolean hasRepeatsHash(String source, int size) {
+        Set<String> slices = new HashSet<>(); // множество всех подстрок длины size
+        for (int i = 0; i <= source.length() - size; i++) { // перебор всех мест старта подстроки
+            String slice = source.substring(i, i + size); // вырезание подстроки
+            if (slices.contains(slice)) { // проверка на наличие повтора этой подстроки
+                return true; // если уже встречали, значит повторы нет
+            } else {
+                slices.add(slice);  // иначе запоминаем подстроку и перебираем дальше
+            }
+        }
+        return false; // если бы нашли, то вышли бы по return true, а значит повторов нет
+    }
+
+    public static boolean hasRepeats(String source, int size) {
+        Set<LazyString> slices = new HashSet<>(); // множество всех подстрок длины size
+        LazyString prev = null; // переменная для сохранения предыдущей подстроки
+        for (int i = 0; i <= source.length() - size; i++) { // перебор всех мест старта подстроки
+            LazyString slice; // вырезание подстроки
+            if (prev == null) {
+                slice = new LazyString(source, 0, size);
+            } else {
+                slice = prev.shiftRight();
+            }
+            if (slices.contains(slice)) { // проверка на наличие повтора этой подстроки
+                return true; // если уже встречали, значит повторы нет
+            } else {
+                slices.add(slice);  // иначе запоминаем подстроку и перебираем дальше
+            }
+            prev = slice; // не забываем обновить переменную для предыдущей подстроки для следующей итерации цикла
         }
         return false; // если бы нашли, то вышли бы по return true, а значит повторов нет
     }
