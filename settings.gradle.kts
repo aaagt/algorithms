@@ -5,6 +5,7 @@ include("teams")
 include("linked-stack")
 include("names-tree")
 include("substring")
+include("social-network")
 
 pluginManagement {
     plugins {
