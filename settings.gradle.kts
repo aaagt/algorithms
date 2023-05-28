@@ -6,6 +6,7 @@ include("linked-stack")
 include("names-tree")
 include("substring")
 include("social-network")
+include("airlines")
 
 pluginManagement {
     plugins {
