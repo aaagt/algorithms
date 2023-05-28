@@ -12,10 +12,10 @@ application {
 
 sourceSets {
     main {
-        java.srcDir("substring/src/main/java")
+        java.srcDir("${project.path}/src/${this@main.name}/${this.name}")
     }
     test {
-        java.srcDir("substring/src/test/java")
+        java.srcDir("${project.path}/src/${this@test.name}/${this.name}")
     }
 }
 

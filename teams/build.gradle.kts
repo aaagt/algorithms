@@ -3,9 +3,7 @@ plugins {
 }
 
 java {
-    toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
-    }
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 application {
@@ -14,15 +12,10 @@ application {
 
 sourceSets {
     main {
-        java {
-            srcDir("teams/src/main/java")
-        }
+        java.srcDir("${project.path}/src/${this@main.name}/${this.name}")
     }
-
     test {
-        java {
-            srcDir("teams/src/test/java")
-        }
+        java.srcDir("${project.path}/src/${this@test.name}/${this.name}")
     }
 }
 
