@@ -13,16 +13,24 @@ public class Graph<T> {
     }
 
     public void createEdge(Vertex<T> a, Vertex<T> b) {
-        // добавляем их друг друга в их списки смежности
-        // ВАШ КОД
+        a.addAdjacentVertex(b);
+        b.addAdjacentVertex(a);
     }
 
     public boolean isConnected(Vertex<T> a, Vertex<T> b) {
-        return dfsFind(a, b, new HashSet<>()); // рекурсивный обход в глубину
+        return dfsFind(a, b, new HashSet<>()); //
     }
 
-    // метод отвечает на вопрос, нашли ли мы обходом из v вершину target с учётом
-    // посещённых вершин, которые записаны в visited
+    /**
+     * рекурсивный обход в глубину
+     * метод отвечает на вопрос, нашли ли мы обходом из v вершину target с учётом
+     * посещённых вершин, которые записаны в visited
+     *
+     * @param v
+     * @param target
+     * @param visited
+     * @return
+     */
     private boolean dfsFind(Vertex<T> v, Vertex<T> target, Set<Vertex<T>> visited) {
         // если вершина в которую зашли (v) это та которую мы искали (target), то поиск закончен
         if (v.equals(target)) {
@@ -30,10 +38,25 @@ public class Graph<T> {
         }
         visited.add(v); // запоминаем вершину которую посетили
 
-        // ВАШ КОД
         // перебираем все смежные вершины у v
-        // если такую вершину ещё не посещали, заходим рекурсивно в неё
-        // если такой заход завершился нахождением target-а - выходим из метода с true
+        for (Vertex<T> vertexToCheck : v.getAdjacent()) {
+
+            // посещённые пропускаем
+            if (visited.contains(vertexToCheck)) {
+                continue;
+            }
+
+            // если нашли - возвращаем true
+            if (vertexToCheck.equals(target)) {
+                return true;
+            }
+
+            // если такую вершину ещё не посещали, заходим рекурсивно в неё
+            // если такой заход завершился нахождением target-а - выходим из метода с true
+            if (dfsFind(vertexToCheck, target, visited)) {
+                return true;
+            }
+        }
 
         return false; // ничего не нашли
     }
